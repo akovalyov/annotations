@@ -12,5 +12,9 @@ php:
   - 7.1
   - hhvm
 
-before_script:
+install:
     - composer install -n
+
+script:
+    - php vendor/bin/php-cs-fixer fix lib --diff --level=psr2 --dry-run -v
+    - php vendor/bin/phpunit
