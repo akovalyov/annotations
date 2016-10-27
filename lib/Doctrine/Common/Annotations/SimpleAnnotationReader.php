@@ -26,6 +26,7 @@ namespace Doctrine\Common\Annotations;
  * full-control over all annotations that are available.
  *
  * @since  2.2
+ *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  * @author Fabio B. Silva <fabio.bat.silva@gmail.com>
  */
@@ -51,8 +52,6 @@ class SimpleAnnotationReader implements Reader
      * Adds a namespace in which we will look for annotations.
      *
      * @param string $namespace
-     *
-     * @return void
      */
     public function addNamespace($namespace)
     {
@@ -60,7 +59,7 @@ class SimpleAnnotationReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getClassAnnotations(\ReflectionClass $class)
     {
@@ -68,7 +67,7 @@ class SimpleAnnotationReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getMethodAnnotations(\ReflectionMethod $method)
     {
@@ -76,7 +75,7 @@ class SimpleAnnotationReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPropertyAnnotations(\ReflectionProperty $property)
     {
@@ -84,7 +83,7 @@ class SimpleAnnotationReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getClassAnnotation(\ReflectionClass $class, $annotationName)
     {
@@ -98,7 +97,7 @@ class SimpleAnnotationReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getMethodAnnotation(\ReflectionMethod $method, $annotationName)
     {
@@ -112,7 +111,7 @@ class SimpleAnnotationReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPropertyAnnotation(\ReflectionProperty $property, $annotationName)
     {

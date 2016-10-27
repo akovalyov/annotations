@@ -20,9 +20,10 @@
 namespace Doctrine\Common\Annotations;
 
 /**
- * Description of AnnotationException
+ * Description of AnnotationException.
  *
  * @since  2.0
+ *
  * @author Benjamin Eberlei <kontakt@beberlei.de>
  * @author Guilherme Blanco <guilhermeblanco@hotmail.com>
  * @author Jonathan Wage <jonwage@gmail.com>
@@ -39,7 +40,7 @@ class AnnotationException extends \Exception
      */
     public static function syntaxError($message)
     {
-        return new self('[Syntax Error] ' . $message);
+        return new self('[Syntax Error] '.$message);
     }
 
     /**
@@ -51,7 +52,7 @@ class AnnotationException extends \Exception
      */
     public static function semanticalError($message)
     {
-        return new self('[Semantical Error] ' . $message);
+        return new self('[Semantical Error] '.$message);
     }
 
     /**
@@ -66,7 +67,7 @@ class AnnotationException extends \Exception
      */
     public static function creationError($message)
     {
-        return new self('[Creation Error] ' . $message);
+        return new self('[Creation Error] '.$message);
     }
 
     /**
@@ -80,7 +81,7 @@ class AnnotationException extends \Exception
      */
     public static function typeError($message)
     {
-        return new self('[Type Error] ' . $message);
+        return new self('[Type Error] '.$message);
     }
 
     /**
@@ -98,7 +99,7 @@ class AnnotationException extends \Exception
         return self::semanticalError(sprintf(
             "Couldn't find constant %s%s.",
             $identifier,
-            $context ? ', ' . $context : ''
+            $context ? ', '.$context : ''
         ));
     }
 
@@ -123,7 +124,7 @@ class AnnotationException extends \Exception
             $annotationName,
             $context,
             $expected,
-            is_object($actual) ? 'an instance of ' . get_class($actual) : gettype($actual)
+            is_object($actual) ? 'an instance of '.get_class($actual) : gettype($actual)
         ));
     }
 
@@ -167,7 +168,7 @@ class AnnotationException extends \Exception
     {
         return new self(sprintf(
             '[Enum Error] Attribute "%s" of @%s declared on %s accept only [%s], but got %s.',
-            $attributeName, 
+            $attributeName,
             $annotationName,
             $context,
             implode(', ', $available),
@@ -181,7 +182,7 @@ class AnnotationException extends \Exception
     public static function optimizerPlusSaveComments()
     {
         return new self(
-            "You have to enable opcache.save_comments=1 or zend_optimizerplus.save_comments=1."
+            'You have to enable opcache.save_comments=1 or zend_optimizerplus.save_comments=1.'
         );
     }
 
@@ -191,7 +192,7 @@ class AnnotationException extends \Exception
     public static function optimizerPlusLoadComments()
     {
         return new self(
-            "You have to enable opcache.load_comments=1 or zend_optimizerplus.load_comments=1."
+            'You have to enable opcache.load_comments=1 or zend_optimizerplus.load_comments=1.'
         );
     }
 }

@@ -42,7 +42,7 @@ class IndexedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getClassAnnotations(\ReflectionClass $class)
     {
@@ -55,7 +55,7 @@ class IndexedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getClassAnnotation(\ReflectionClass $class, $annotation)
     {
@@ -63,7 +63,7 @@ class IndexedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getMethodAnnotations(\ReflectionMethod $method)
     {
@@ -76,7 +76,7 @@ class IndexedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getMethodAnnotation(\ReflectionMethod $method, $annotation)
     {
@@ -84,7 +84,7 @@ class IndexedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPropertyAnnotations(\ReflectionProperty $property)
     {
@@ -97,7 +97,7 @@ class IndexedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPropertyAnnotation(\ReflectionProperty $property, $annotation)
     {

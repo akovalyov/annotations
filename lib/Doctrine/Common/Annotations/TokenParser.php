@@ -70,19 +70,18 @@ class TokenParser
     /**
      * Gets the next non whitespace and non comment token.
      *
-     * @param boolean $docCommentIsComment If TRUE then a doc comment is considered a comment and skipped.
-     *                                     If FALSE then only whitespace and normal comments are skipped.
+     * @param bool $docCommentIsComment If TRUE then a doc comment is considered a comment and skipped.
+     *                                  If FALSE then only whitespace and normal comments are skipped
      *
-     * @return array|null The token if exists, null otherwise.
+     * @return array|null The token if exists, null otherwise
      */
-    public function next($docCommentIsComment = TRUE)
+    public function next($docCommentIsComment = true)
     {
-        for ($i = $this->pointer; $i < $this->numTokens; $i++) {
-            $this->pointer++;
+        for ($i = $this->pointer; $i < $this->numTokens; ++$i) {
+            ++$this->pointer;
             if ($this->tokens[$i][0] === T_WHITESPACE ||
                 $this->tokens[$i][0] === T_COMMENT ||
                 ($docCommentIsComment && $this->tokens[$i][0] === T_DOC_COMMENT)) {
-
                 continue;
             }
 
@@ -95,11 +94,10 @@ class TokenParser
     /**
      * Parses a single use statement.
      *
-     * @return array A list with all found class names for a use statement.
+     * @return array A list with all found class names for a use statement
      */
     public function parseUseStatement()
     {
-
         $groupRoot = '';
         $class = '';
         $alias = '';
@@ -110,23 +108,23 @@ class TokenParser
             if (!$explicitAlias && $isNameToken) {
                 $class .= $token[1];
                 $alias = $token[1];
-            } else if ($explicitAlias && $isNameToken) {
+            } elseif ($explicitAlias && $isNameToken) {
                 $alias .= $token[1];
-            } else if ($token[0] === T_AS) {
+            } elseif ($token[0] === T_AS) {
                 $explicitAlias = true;
                 $alias = '';
-            } else if ($token === ',') {
-                $statements[strtolower($alias)] = $groupRoot . $class;
+            } elseif ($token === ',') {
+                $statements[strtolower($alias)] = $groupRoot.$class;
                 $class = '';
                 $alias = '';
                 $explicitAlias = false;
-            } else if ($token === ';') {
-                $statements[strtolower($alias)] = $groupRoot . $class;
+            } elseif ($token === ';') {
+                $statements[strtolower($alias)] = $groupRoot.$class;
                 break;
-            } else if ($token === '{' ) {
+            } elseif ($token === '{') {
                 $groupRoot = $class;
                 $class = '';
-            } else if ($token === '}' ) {
+            } elseif ($token === '}') {
                 continue;
             } else {
                 break;
@@ -139,9 +137,9 @@ class TokenParser
     /**
      * Gets all use statements.
      *
-     * @param string $namespaceName The namespace name of the reflected class.
+     * @param string $namespaceName The namespace name of the reflected class
      *
-     * @return array A list with all found use statements.
+     * @return array A list with all found use statements
      */
     public function parseUseStatements($namespaceName)
     {
@@ -167,7 +165,7 @@ class TokenParser
     /**
      * Gets the namespace.
      *
-     * @return string The found namespace.
+     * @return string The found namespace
      */
     public function parseNamespace()
     {
@@ -182,7 +180,7 @@ class TokenParser
     /**
      * Gets the class name.
      *
-     * @return string The found class name.
+     * @return string The found class name
      */
     public function parseClass()
     {

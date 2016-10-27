@@ -24,6 +24,7 @@ namespace Doctrine\Common\Annotations\Annotation;
  * annotations during the parsing process.
  *
  * @Annotation
+ *
  * @author Johannes M. Schmitt <schmittjoh@gmail.com>
  */
 final class IgnoreAnnotation

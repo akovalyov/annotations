@@ -41,7 +41,7 @@ final class CachedReader implements Reader
     private $cache;
 
     /**
-     * @var boolean
+     * @var bool
      */
     private $debug;
 
@@ -61,11 +61,11 @@ final class CachedReader implements Reader
     {
         $this->delegate = $reader;
         $this->cache = $cache;
-        $this->debug = (boolean) $debug;
+        $this->debug = (bool) $debug;
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getClassAnnotations(ReflectionClass $class)
     {
@@ -84,7 +84,7 @@ final class CachedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getClassAnnotation(ReflectionClass $class, $annotationName)
     {
@@ -98,7 +98,7 @@ final class CachedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPropertyAnnotations(\ReflectionProperty $property)
     {
@@ -118,7 +118,7 @@ final class CachedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getPropertyAnnotation(\ReflectionProperty $property, $annotationName)
     {
@@ -132,7 +132,7 @@ final class CachedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getMethodAnnotations(\ReflectionMethod $method)
     {
@@ -152,7 +152,7 @@ final class CachedReader implements Reader
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getMethodAnnotation(\ReflectionMethod $method, $annotationName)
     {
@@ -167,8 +167,6 @@ final class CachedReader implements Reader
 
     /**
      * Clears loaded annotations.
-     *
-     * @return void
      */
     public function clearLoadedAnnotations()
     {
@@ -178,10 +176,10 @@ final class CachedReader implements Reader
     /**
      * Fetches a value from the cache.
      *
-     * @param string          $cacheKey The cache key.
-     * @param ReflectionClass $class    The related class.
+     * @param string          $cacheKey The cache key
+     * @param ReflectionClass $class    The related class
      *
-     * @return mixed The cached value or false when the value is not in cache.
+     * @return mixed The cached value or false when the value is not in cache
      */
     private function fetchFromCache($cacheKey, ReflectionClass $class)
     {
@@ -197,10 +195,8 @@ final class CachedReader implements Reader
     /**
      * Saves a value to the cache.
      *
-     * @param string $cacheKey The cache key.
-     * @param mixed  $value    The value.
-     *
-     * @return void
+     * @param string $cacheKey The cache key
+     * @param mixed  $value    The value
      */
     private function saveToCache($cacheKey, $value)
     {
@@ -213,10 +209,10 @@ final class CachedReader implements Reader
     /**
      * Checks if the cache is fresh.
      *
-     * @param string           $cacheKey
+     * @param string          $cacheKey
      * @param ReflectionClass $class
      *
-     * @return boolean
+     * @return bool
      */
     private function isCacheFresh($cacheKey, ReflectionClass $class)
     {
@@ -228,15 +224,16 @@ final class CachedReader implements Reader
     }
 
     /**
-     * Returns the time the class was last modified, testing traits and parents
+     * Returns the time the class was last modified, testing traits and parents.
      *
      * @param ReflectionClass $class
+     *
      * @return int
      */
     private function getLastModification(ReflectionClass $class)
     {
         $filename = $class->getFileName();
-        $parent   = $class->getParentClass();
+        $parent = $class->getParentClass();
 
         return max(array_merge(
             [$filename ? filemtime($filename) : 0],

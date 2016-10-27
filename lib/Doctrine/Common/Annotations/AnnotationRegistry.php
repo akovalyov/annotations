@@ -34,19 +34,16 @@ final class AnnotationRegistry
      *
      * @var array
      */
-    static private $autoloadNamespaces = array();
+    private static $autoloadNamespaces = array();
 
     /**
      * A map of autoloader callables.
      *
      * @var array
      */
-    static private $loaders = array();
+    private static $loaders = array();
 
-    /**
-     * @return void
-     */
-    static public function reset()
+    public static function reset()
     {
         self::$autoloadNamespaces = array();
         self::$loaders = array();
@@ -56,10 +53,8 @@ final class AnnotationRegistry
      * Registers file.
      *
      * @param string $file
-     *
-     * @return void
      */
-    static public function registerFile($file)
+    public static function registerFile($file)
     {
         require_once $file;
     }
@@ -71,10 +66,8 @@ final class AnnotationRegistry
      *
      * @param string            $namespace
      * @param string|array|null $dirs
-     *
-     * @return void
      */
-    static public function registerAutoloadNamespace($namespace, $dirs = null)
+    public static function registerAutoloadNamespace($namespace, $dirs = null)
     {
         self::$autoloadNamespaces[$namespace] = $dirs;
     }
@@ -85,10 +78,8 @@ final class AnnotationRegistry
      * Loading of this namespaces will be done with a PSR-0 namespace loading algorithm.
      *
      * @param array $namespaces
-     *
-     * @return void
      */
-    static public function registerAutoloadNamespaces(array $namespaces)
+    public static function registerAutoloadNamespaces(array $namespaces)
     {
         self::$autoloadNamespaces = array_merge(self::$autoloadNamespaces, $namespaces);
     }
@@ -101,14 +92,12 @@ final class AnnotationRegistry
      *
      * @param callable $callable
      *
-     * @return void
-     *
      * @throws \InvalidArgumentException
      */
-    static public function registerLoader($callable)
+    public static function registerLoader($callable)
     {
         if (!is_callable($callable)) {
-            throw new \InvalidArgumentException("A callable is expected in AnnotationRegistry::registerLoader().");
+            throw new \InvalidArgumentException('A callable is expected in AnnotationRegistry::registerLoader().');
         }
         self::$loaders[] = $callable;
     }
@@ -118,22 +107,24 @@ final class AnnotationRegistry
      *
      * @param string $class
      *
-     * @return boolean
+     * @return bool
      */
-    static public function loadAnnotationClass($class)
+    public static function loadAnnotationClass($class)
     {
-        foreach (self::$autoloadNamespaces AS $namespace => $dirs) {
+        foreach (self::$autoloadNamespaces as $namespace => $dirs) {
             if (strpos($class, $namespace) === 0) {
-                $file = str_replace("\\", DIRECTORY_SEPARATOR, $class) . ".php";
+                $file = str_replace('\\', DIRECTORY_SEPARATOR, $class).'.php';
                 if ($dirs === null) {
                     if ($path = stream_resolve_include_path($file)) {
                         require $path;
+
                         return true;
                     }
                 } else {
-                    foreach((array)$dirs AS $dir) {
-                        if (is_file($dir . DIRECTORY_SEPARATOR . $file)) {
-                            require $dir . DIRECTORY_SEPARATOR . $file;
+                    foreach ((array) $dirs as $dir) {
+                        if (is_file($dir.DIRECTORY_SEPARATOR.$file)) {
+                            require $dir.DIRECTORY_SEPARATOR.$file;
+
                             return true;
                         }
                     }
@@ -141,11 +132,12 @@ final class AnnotationRegistry
             }
         }
 
-        foreach (self::$loaders AS $loader) {
+        foreach (self::$loaders as $loader) {
             if (call_user_func($loader, $class) === true) {
                 return true;
             }
         }
+
         return false;
     }
 }
